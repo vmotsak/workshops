@@ -12,10 +12,26 @@
     %nav.navbar.navbar-default
       .container-fluid
         .navbar-header
-          %span.navbar-brand #{AppConfig.workshops_name}
-        %p.navbar-text.navbar-right
-          Links should go here
-    .container-fluid
+          .navbar-brand #{AppConfig.workshops_name}
+        %ul.nav.navbar-nav
+          %li= link_to 'Categories', categories_path
+          %li= link_to 'Products', products_path
+        %ul.nav.navbar-nav.navbar-right
+          - if user_signed_in?
+            %li= link_to 'Edit account', edit_user_registration_path
+            %li= link_to 'Sign out', destroy_user_session_path, :method=>'delete'
+          - else
+            %li= link_to 'Sign up', new_user_registration_path
+            %li= link_to 'Sign in', new_user_session_path
+    .container
+      %ol.breadcrumb
+        %li
+          %a{href:'/'} Home
+        = yield(:breadcrumb) if content_for?(:breadcrumb)
+      .row
+        .col-lg-12
+          -flash.each do |name, msg|
+            =content_tag :div, msg, class: "alert alert-#{name}", role: 'alert'
       .row
         .col-lg-12
           = yield

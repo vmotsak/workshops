@@ -1,10 +1,11 @@
 %h1 Listing products
 
-%table
+%table.table.table-striped
   %tr
     %th Title
     %th Description
     %th Price
+    %th Owner
     %th
     %th
     %th
@@ -13,9 +14,9 @@
     %tr
       %td= product.title
       %td= product.description
-      %td= product.price
+      %td.text-right= product.price
+      %td= product.author
       %td= link_to 'Show', category_product_path(product.category, product)
-      %td= link_to 'Edit', edit_category_product_path(product.category, product)
-      %td= link_to 'Destroy', category_product_path(product.category, product), method: :delete, data: { confirm: 'Are you sure?' }
-
+      %td= link_to content_tag(:span,'',class:'glyphicon glyphicon-edit'), edit_category_product_path(product.category, product) if product.owner?(current_user)
+      %td= link_to content_tag(:span,'',class:'glyphicon glyphicon-remove'), category_product_path(product.category, product), method: :delete, data: { confirm: 'Are you sure?' } if product.owner?(current_user)
 %br

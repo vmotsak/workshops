@@ -1,9 +1,12 @@
-%p#notice= notice
-%p#error= flash[:error]
-
+-content_for :breadcrumb do
+  %li= link_to 'Categories', categories_path
+  %li= link_to category.name, category
 %p
   %b Title:
   = product.title
+  - if product.owner?(current_user)
+    = link_to content_tag(:span,'',class:'glyphicon glyphicon-edit'), edit_category_product_path(category.id, product.id)
+    = link_to content_tag(:span,'',class:'glyphicon glyphicon-remove'), category_product_path(product.category, product), method: :delete, data: { confirm: 'Are you sure?' }
 %p
   %b Description:
   = product.description
@@ -12,14 +15,12 @@
   = product.price
 
 %p
-  %b Category
+  %b Category:
   = product.category.name
 
-%h3 Reviews
-= render 'reviews/form'
-
-= render reviews
-
-= link_to 'Edit', edit_category_product_path(category.id, product.id)
-\|
-= link_to 'Back', category_products_path, class: 'btn btn-primary'
+%p
+  %b Reviews:
+  = render reviews
+  -if current_user
+    %b Add review
+    = render 'reviews/form'

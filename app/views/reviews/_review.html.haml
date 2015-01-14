@@ -1,4 +1,10 @@
-%p= review.content
-%p
-  %b= review.rating
-  %em= review.author
+.panel.panel-default
+  .panel-heading
+    %span.glyphicon.glyphicon-user
+    %em= review.author
+    %span.pull-right= review.created_at.in_time_zone("Warsaw")
+  .panel-body
+    - 5.times do |i|
+      %i{class: "glyphicon glyphicon-star#{'-empty' if i>=review.rating}"}
+    %br
+    = review.content
