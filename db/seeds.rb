@@ -6,7 +6,7 @@
 #   cities = City.create!([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create!(name: 'Emanuel', city: cities.first)
 ActiveRecord::Base.transaction do
-  admin = User.create!({email: 'admin@example.com', firstname: 'John', lastname: 'Admin', password: 'password', password_confirmation: 'password'},admin:true)
+  admin = User.create!({email: 'admin@example.com', firstname: 'John', lastname: 'Admin', password: 'password', password_confirmation: 'password',admin:true})
   alan = User.create!({email: 'a_elam@teleworm.us', firstname: 'Alan', lastname: 'Elam', password: 'zzzzxxxx', password_confirmation: 'zzzzxxxx'})
   krista = User.create!({email: 'swanson@teleworm.us', firstname: 'Krista', lastname: 'Swanson', password: 'zzzzxxxx', password_confirmation: 'zzzzxxxx'})
   melva = User.create!({email: 'goselin@teleworm.us', firstname: 'Melva', lastname: 'Gosselin', password: 'zzzzxxxx', password_confirmation: 'zzzzxxxx'})
